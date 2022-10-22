@@ -9,23 +9,38 @@ class Dashboard extends StatefulWidget {
 }
 
 class _StatefulWidgetState extends State<Dashboard> {
-  // late ScrollController _controller;
-  // double pixels = 0.0;
-  // @override
-  // void initState(){
-  //   super.initState();
-  //   _controller = ScrollController();
-  //   _controller.addListener(() {
-  //   pixels = _controller.position.pixels;
-  //   print(_controller.position.pixels);
-  //   });
-  // }
+
   @override
   static const IconData message = IconData(0xe3e0, fontFamily: 'MaterialIcons');
   static const account_circle = IconData(0xe043, fontFamily: 'MaterialIcons');
   static const shopping_cart = IconData(0xe59c, fontFamily: 'MaterialIcons');
   static const search = IconData(0xe567, fontFamily: 'MaterialIcons');
   static const home = IconData(0xe318, fontFamily: 'MaterialIcons');
+
+  String type1 ="";
+  String type2 ="";
+  String model1 ="";
+  String model2 ="";
+  late int bottom;
+  late int bottomzip;
+  late int tp;
+  late int flit;
+  late int kp;
+  late int stitches;
+  late int bp;
+  late int loop;
+  late int slack;
+  late int bc ;
+  String kplist = "";
+  late int sideopen;
+  late int stitches2;
+  late int arrow;
+  late int opc;
+  late int ipc;
+  String patti = "";
+  late int collor;
+  String button = "";
+  String desc = "";
 
   Widget build(BuildContext context) {
     final screen_width = MediaQuery.of(context).size.width;
@@ -50,14 +65,21 @@ class _StatefulWidgetState extends State<Dashboard> {
                       //After Dashboard
 
                       Padding(
-                        padding: EdgeInsets.all(screen_width * 0.02),
+                        // padding: EdgeInsets.all(screen_width * 0.02),
+                        padding:EdgeInsets.fromLTRB(10, 0, 10, 0),
                         child: Column(
                           children: [
+
+                            SizedBox(
+                              height: 17
+                            ),
                             //1. Total Customers
 
                             Container(
-                              width: screen_width * 0.14,
-                              height: screen_height * 0.14,
+                              // width: screen_width * 0.14,
+                              width: 190,
+                              // height: screen_height,
+                              height: 110,
                               color: Colors.white,
                               child: Column(children: [
                                 Center(
@@ -68,7 +90,7 @@ class _StatefulWidgetState extends State<Dashboard> {
                                       size: 35,
                                     ),
                                     title: Text(
-                                      "Total Customers !",
+                                      "Total Customers!",
                                       style: TextStyle(
                                           color: Color.fromRGBO(47, 71, 131, 1),
                                           fontSize: 13,
@@ -77,13 +99,13 @@ class _StatefulWidgetState extends State<Dashboard> {
                                   ),
                                 ),
                                 SizedBox(
-                                  height: screen_height / 40,
+                                  height: 17,
                                 ),
                                 InkWell(
                                   onTap: () {},
                                   child: Container(
                                       width: double.infinity,
-                                      height: screen_height / 19.5,
+                                      height: 45,
                                       color: Colors.black54,
                                       child: Center(
                                         child: ListTile(
@@ -110,8 +132,10 @@ class _StatefulWidgetState extends State<Dashboard> {
                             // 2. Total Orders
 
                             Container(
-                              width: screen_width * 0.14,
-                              height: screen_height * 0.14,
+                              // width: screen_width * 0.14,
+                              // height: screen_height * 0.14,
+                              width: 190,
+                              height: 110,
                               color: Colors.white,
                               child: Column(children: [
                                 Center(
@@ -125,19 +149,20 @@ class _StatefulWidgetState extends State<Dashboard> {
                                     "Total Orders !",
                                     style: TextStyle(
                                         color: Color.fromRGBO(47, 71, 131, 1),
+                                        // fontSize: screen_height/53.5,
                                         fontSize: 13,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 )),
                                 SizedBox(
-                                  height: screen_height / 40,
+                                  height: 17,
                                 ),
                                 InkWell(
                                     onTap: () {},
                                     child: SafeArea(
                                       child: Container(
                                           width: double.infinity,
-                                          height: screen_height / 19.5,
+                                          height: 45,
                                           color: Colors.black54,
                                           child: Center(
                                             child: ListTile(
@@ -404,7 +429,7 @@ class _StatefulWidgetState extends State<Dashboard> {
                                     onTap: () {},
                                     child: Icon(
                                       Icons.add_circle_sharp,
-                                      size: screen_height / 40,
+                                      size: 16,
                                       color: Colors.red,
                                     ),
                                   )
@@ -449,10 +474,557 @@ class _StatefulWidgetState extends State<Dashboard> {
                                               ),
                                             ),
                                           ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                          )
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                  width: 30
+                                              ),
+                                              Text('Type',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 27
+                                              ),
+                                              Container(
+                                                width: 110,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child: DropdownButtonFormField(
+                                                  items: <String>["xx","yy","zz"].map(
+                                                          (e) => DropdownMenuItem(child: Text(e,
+                                                          style:TextStyle(
+                                                            color:Color.fromRGBO(47, 71, 131, 1),
+                                                            fontSize:11,
+                                                            fontWeight:FontWeight.bold,
+                                                          )),
+                                                            value: e,)
+                                                  ).toList(),
+                                                  onChanged: (String? val) {
+                                                    setState(() {
+                                                      type1 = val!;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                      hintText: "Full Pant",
+                                                      enabledBorder: InputBorder.none,
+                                                      hintStyle: TextStyle(
+                                                          color: Colors.black,
+                                                          fontWeight: FontWeight.bold,
+                                                          fontSize: 10
+                                                      ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 35
+                                              ),
+
+                                              Text('Fit/பிளிட் ',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 60
+                                              ),
+                                              Container(
+                                                width: 60,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child: DropdownButtonFormField<int>(
+                                                  items: <int>[1,2,3].map(
+                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
+                                                          style:TextStyle(
+                                                            color:Color.fromRGBO(47, 71, 131, 1),
+                                                            fontSize:11,
+                                                            fontWeight:FontWeight.bold,
+                                                          )),value: e,)
+                                                  ).toList(),
+                                                  onChanged: (int? val) {
+                                                    setState(() {
+                                                      flit = val!;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "1",
+                                                    enabledBorder: InputBorder.none,
+                                                    hintStyle: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 10
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 30
+                                              ),
+
+                                              Text('Bottom Zip',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 20
+                                              ),
+                                              Container(
+                                                width: 60,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child: DropdownButtonFormField<int>(
+                                                  items: <int>[1,2,3].map(
+                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
+                                                          style:TextStyle(
+                                                            color:Color.fromRGBO(47, 71, 131, 1),
+                                                            fontSize:11,
+                                                            fontWeight:FontWeight.bold,
+                                                          )),value: e,)
+                                                  ).toList(),
+                                                  onChanged: (int? val) {
+                                                    setState(() {
+                                                      bottomzip = val!;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "1",
+                                                    enabledBorder: InputBorder.none,
+                                                    hintStyle: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 10
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: screen_width/50
+                                              ),
+
+
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                  width: 30
+                                              ),
+                                              Text('Model',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 15
+                                              ),
+                                              Container(
+                                                width: 110,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child: DropdownButtonFormField(
+                                                  items: <String>["xx","yy","zz"].map(
+                                                          (e) => DropdownMenuItem(child: Text(e,
+                                                          style:TextStyle(
+                                                            color:Color.fromRGBO(47, 71, 131, 1),
+                                                            fontSize:11,
+                                                            fontWeight:FontWeight.bold,
+                                                          )),
+                                                        value: e,)
+                                                  ).toList(),
+                                                  onChanged: (String? val) {
+                                                    setState(() {
+                                                      model1 = val!;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "Pencil/பென்சில்",
+                                                    enabledBorder: InputBorder.none,
+                                                    hintStyle: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 10
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: screen_width/40
+                                              ),
+
+                                              Text('Bottom/பாட்டம்',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 16
+                                              ),
+                                              Container(
+                                                width: 60,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child: DropdownButtonFormField<int>(
+                                                  items: <int>[1,2,3].map(
+                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
+                                                          style:TextStyle(
+                                                            color:Color.fromRGBO(47, 71, 131, 1),
+                                                            fontSize:11,
+                                                            fontWeight:FontWeight.bold,
+                                                          )),value: e,)
+                                                  ).toList(),
+                                                  onChanged: (int? val) {
+                                                    setState(() {
+                                                      bottom = val!;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "1",
+                                                    enabledBorder: InputBorder.none,
+                                                    hintStyle: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 10
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 30
+                                              ),
+
+                                              Text('T.P               ',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 20
+                                              ),
+                                              Container(
+                                                width: 60,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child: DropdownButtonFormField<int>(
+                                                  items: <int>[1,2,3].map(
+                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
+                                                          style:TextStyle(
+                                                            color:Color.fromRGBO(47, 71, 131, 1),
+                                                            fontSize:11,
+                                                            fontWeight:FontWeight.bold,
+                                                          )),value: e,)
+                                                  ).toList(),
+                                                  onChanged: (int? val) {
+                                                    setState(() {
+                                                      tp = val!;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "1",
+                                                    enabledBorder: InputBorder.none,
+                                                    hintStyle: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 10
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: screen_width/50
+                                              ),
+
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                  width: 30
+                                              ),
+                                              Container(
+                                                width: 45,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child: DropdownButtonFormField(
+                                                  items: <String>["xx","yy","zz"].map(
+                                                          (e) => DropdownMenuItem(child: Text(e,
+                                                          style:TextStyle(
+                                                            color:Color.fromRGBO(47, 71, 131, 1),
+                                                            fontSize:11,
+                                                            fontWeight:FontWeight.bold,
+                                                          )),
+                                                        value: e,)
+                                                  ).toList(),
+                                                  onChanged: (String? val) {
+                                                    setState(() {
+                                                      kplist = val!;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "K. P",
+                                                    enabledBorder: InputBorder.none,
+                                                    hintStyle: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 10
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 15
+                                              ),
+                                              Container(
+                                                width: 110,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child: DropdownButtonFormField<int>(
+                                                  items: <int>[1,2,3].map(
+                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
+                                                          style:TextStyle(
+                                                            color:Color.fromRGBO(47, 71, 131, 1),
+                                                            fontSize:11,
+                                                            fontWeight:FontWeight.bold,
+                                                          )),
+                                                        value: e,)
+                                                  ).toList(),
+                                                  onChanged: (int? val) {
+                                                    setState(() {
+                                                      bc = val!;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "1",
+                                                    enabledBorder: InputBorder.none,
+                                                    hintStyle: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 10
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: screen_width/40
+                                              ),
+
+                                              Text('Stitches/தையல்',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 16
+                                              ),
+                                              Container(
+                                                width: 60,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child: DropdownButtonFormField<int>(
+                                                  items: <int>[1,2,3].map(
+                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
+                                                          style:TextStyle(
+                                                            color:Color.fromRGBO(47, 71, 131, 1),
+                                                            fontSize:11,
+                                                            fontWeight:FontWeight.bold,
+                                                          )),value: e,)
+                                                  ).toList(),
+                                                  onChanged: (int? val) {
+                                                    setState(() {
+                                                      stitches2 = val!;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "1",
+                                                    enabledBorder: InputBorder.none,
+                                                    hintStyle: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 10
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 30
+                                              ),
+
+                                              Text('Description  ',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 20
+                                              ),
+                                              Container(
+                                                  width: 200,
+                                                  height: 20,
+                                                  padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                  ),
+                                                  child : TextField(
+
+                                                  )
+                                              ),
+                                              SizedBox(
+                                                  width: screen_width/50
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                              height: 8
+                                          ),
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                              width: 30
+                                          ),
+                                          Text('B.P     ',
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color.fromRGBO(47, 71, 131, 1),
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                              width: 15
+                                          ),
+                                          Container(
+                                            width: 110,
+                                            height: 20,
+                                            padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                            decoration: BoxDecoration(
+                                                border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                            ),
+                                            child: DropdownButtonFormField<int>(
+                                              items: <int>[1,2,3].map(
+                                                      (e) => DropdownMenuItem(child: Text(e.toString(),
+                                                      style:TextStyle(
+                                                        color:Color.fromRGBO(47, 71, 131, 1),
+                                                        fontSize:11,
+                                                        fontWeight:FontWeight.bold,
+                                                      )),
+                                                    value: e,)
+                                              ).toList(),
+                                              onChanged: (int? val) {
+                                                setState(() {
+                                                  bp = val!;
+                                                });
+                                              },
+                                              decoration: InputDecoration(
+                                                hintText: "1",
+                                                enabledBorder: InputBorder.none,
+                                                hintStyle: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 10
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                              width: screen_width/40
+                                          ),
+
+                                          Text('Loop/லூப்   ',
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                              color: Color.fromRGBO(47, 71, 131, 1),
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                              width: 30
+                                          ),
+                                          Container(
+                                            width: 60,
+                                            height: 20,
+                                            padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                            decoration: BoxDecoration(
+                                                border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                            ),
+                                            child: DropdownButtonFormField<int>(
+                                              items: <int>[1,2,3].map(
+                                                      (e) => DropdownMenuItem(child: Text(e.toString(),
+                                                      style:TextStyle(
+                                                        color:Color.fromRGBO(47, 71, 131, 1),
+                                                        fontSize:11,
+                                                        fontWeight:FontWeight.bold,
+                                                      )),value: e,)
+                                              ).toList(),
+                                              onChanged: (int? val) {
+                                                setState(() {
+                                                  loop = val!;
+                                                });
+                                              },
+                                              decoration: InputDecoration(
+                                                hintText: "1",
+                                                enabledBorder: InputBorder.none,
+                                                hintStyle: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 10
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ]
+                                      )
                                         ],
                                       ),
                                     ),
@@ -563,7 +1135,7 @@ class _StatefulWidgetState extends State<Dashboard> {
                                               ),
                                             ],
                                           ),
-                                        )
+                                        ),
                                       ],
                                     )
                                   ],
@@ -583,6 +1155,7 @@ class _StatefulWidgetState extends State<Dashboard> {
 
                     Padding(
                       padding: EdgeInsets.fromLTRB(screen_width / 43, 15, 0, 0),
+                      child: SingleChildScrollView(
                       child: Container(
                         width: screen_width * 0.78,
                         color: Colors.white,
@@ -729,7 +1302,7 @@ class _StatefulWidgetState extends State<Dashboard> {
                                     onTap: () {},
                                     child: Icon(
                                       Icons.add_circle_sharp,
-                                      size: screen_height / 40,
+                                      size: 16,
                                       color: Colors.red,
                                     ),
                                   )
@@ -774,9 +1347,581 @@ class _StatefulWidgetState extends State<Dashboard> {
                                               ),
                                             ),
                                           ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                  width: 30
+                                              ),
+                                              Text('Type',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 27
+                                              ),
+                                              Container(
+                                                width: 110,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child: DropdownButtonFormField(
+                                                  items: <String>["xx","yy","zz"].map(
+                                                          (e) => DropdownMenuItem(child: Text(e,
+                                                          style:TextStyle(
+                                                            color:Color.fromRGBO(47, 71, 131, 1),
+                                                            fontSize:11,
+                                                            fontWeight:FontWeight.bold,
+                                                          )),
+                                                        value: e,)
+                                                  ).toList(),
+                                                  onChanged: (String? val) {
+                                                    setState(() {
+                                                      type2 = val!;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "Full hand shirt",
+                                                    enabledBorder: InputBorder.none,
+                                                    hintStyle: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 10
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 35
+                                              ),
+
+                                              Text('F.Patti/F.பட்டி  ',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 30
+                                              ),
+                                              Container(
+                                                width: 60,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child: DropdownButtonFormField(
+                                                  items: <String>["xx","yy","zz"].map(
+                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
+                                                          style:TextStyle(
+                                                            color:Color.fromRGBO(47, 71, 131, 1),
+                                                            fontSize:11,
+                                                            fontWeight:FontWeight.bold,
+                                                          )),value: e,)
+                                                  ).toList(),
+                                                  onChanged: (String? val) {
+                                                    setState(() {
+                                                      patti = val!;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "1",
+                                                    enabledBorder: InputBorder.none,
+                                                    hintStyle: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 10
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 30
+                                              ),
+
+                                              Text('I P C           ',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 28
+                                              ),
+                                              Container(
+                                                width: 60,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child: DropdownButtonFormField<int>(
+                                                  items: <int>[1,2,3].map(
+                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
+                                                          style:TextStyle(
+                                                            color:Color.fromRGBO(47, 71, 131, 1),
+                                                            fontSize:11,
+                                                            fontWeight:FontWeight.bold,
+                                                          )),value: e,)
+                                                  ).toList(),
+                                                  onChanged: (int? val) {
+                                                    setState(() {
+                                                      ipc = val!;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "1",
+                                                    enabledBorder: InputBorder.none,
+                                                    hintStyle: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 10
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: screen_width/50
+                                              ),
+
+
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                  width: 30
+                                              ),
+                                              Text('Model',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 15
+                                              ),
+                                              Container(
+                                                width: 110,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child: DropdownButtonFormField(
+                                                  items: <String>["xx","yy","zz"].map(
+                                                          (e) => DropdownMenuItem(child: Text(e,
+                                                          style:TextStyle(
+                                                            color:Color.fromRGBO(47, 71, 131, 1),
+                                                            fontSize:11,
+                                                            fontWeight:FontWeight.bold,
+                                                          )),
+                                                        value: e,)
+                                                  ).toList(),
+                                                  onChanged: (String? val) {
+                                                    setState(() {
+                                                      model2 = val!;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "Suit/சூட் ",
+                                                    enabledBorder: InputBorder.none,
+                                                    hintStyle: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 10
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 16
+                                              ),
+
+                                              Text('Side Open/சைடு ஓபன்',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 6
+                                              ),
+                                              Container(
+                                                width: 50,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child: DropdownButtonFormField<int>(
+                                                  items: <int>[1,2,3].map(
+                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
+                                                          style:TextStyle(
+                                                            color:Color.fromRGBO(47, 71, 131, 1),
+                                                            fontSize:11,
+                                                            fontWeight:FontWeight.bold,
+                                                          )),value: e,)
+                                                  ).toList(),
+                                                  onChanged: (int? val) {
+                                                    setState(() {
+                                                      sideopen = val!;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "1",
+                                                    enabledBorder: InputBorder.none,
+                                                    hintStyle: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 10
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 20
+                                              ),
+
+                                              Text('Collar/காலர்',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 10
+                                              ),
+                                              Container(
+                                                width: 60,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child: DropdownButtonFormField<int>(
+                                                  items: <int>[1,2,3].map(
+                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
+                                                          style:TextStyle(
+                                                            color:Color.fromRGBO(47, 71, 131, 1),
+                                                            fontSize:11,
+                                                            fontWeight:FontWeight.bold,
+                                                          )),value: e,)
+                                                  ).toList(),
+                                                  onChanged: (int? val) {
+                                                    setState(() {
+                                                      collor = val!;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "1",
+                                                    enabledBorder: InputBorder.none,
+                                                    hintStyle: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 10
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: screen_width/50
+                                              ),
+
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                  width: 30
+                                              ),
+                                              Text('Slock',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 25
+                                              ),
+                                              Container(
+                                                width: 110,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child: DropdownButtonFormField<int>(
+                                                  items: <int>[1,2,3].map(
+                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
+                                                          style:TextStyle(
+                                                            color:Color.fromRGBO(47, 71, 131, 1),
+                                                            fontSize:11,
+                                                            fontWeight:FontWeight.bold,
+                                                          )),
+                                                        value: e,)
+                                                  ).toList(),
+                                                  onChanged: (int? val) {
+                                                    setState(() {
+                                                      slack = val!;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "1",
+                                                    enabledBorder: InputBorder.none,
+                                                    hintStyle: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 10
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 35
+                                              ),
+
+                                              Text('Stitches/தையல்',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 18
+                                              ),
+                                              Container(
+                                                width: 60,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child: DropdownButtonFormField<int>(
+                                                  items: <int>[1,2,3].map(
+                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
+                                                          style:TextStyle(
+                                                            color:Color.fromRGBO(47, 71, 131, 1),
+                                                            fontSize:11,
+                                                            fontWeight:FontWeight.bold,
+                                                          )),value: e,)
+                                                  ).toList(),
+                                                  onChanged: (int? val) {
+                                                    setState(() {
+                                                      stitches = val!;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "1",
+                                                    enabledBorder: InputBorder.none,
+                                                    hintStyle: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 10
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 20
+                                              ),
+
+                                              Text('Button/பட்டன்',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 5
+                                              ),
+                                              Container(
+                                                width: 60,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child: DropdownButtonFormField<String>(
+                                                  items: <String>["xx","yy","zz"].map(
+                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
+                                                          style:TextStyle(
+                                                            color:Color.fromRGBO(47, 71, 131, 1),
+                                                            fontSize:11,
+                                                            fontWeight:FontWeight.bold,
+                                                          )),value: e,)
+                                                  ).toList(),
+                                                  onChanged: (String? val) {
+                                                    setState(() {
+                                                      button = val!;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "1",
+                                                    enabledBorder: InputBorder.none,
+                                                    hintStyle: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 10
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: screen_width/50
+                                              ),
+
+
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                  width: 30
+                                              ),
+                                              Text('B.C     ',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 15
+                                              ),
+                                              Container(
+                                                width: 110,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child: DropdownButtonFormField<int>(
+                                                  items: <int>[1,2,3].map(
+                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
+                                                          style:TextStyle(
+                                                            color:Color.fromRGBO(47, 71, 131, 1),
+                                                            fontSize:11,
+                                                            fontWeight:FontWeight.bold,
+                                                          )),
+                                                        value: e,)
+                                                  ).toList(),
+                                                  onChanged: (int? val) {
+                                                    setState(() {
+                                                      bc = val!;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "1",
+                                                    enabledBorder: InputBorder.none,
+                                                    hintStyle: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 10
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: screen_width/40
+                                              ),
+
+                                              Text('Arrow/ஆரோ  ',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 16
+                                              ),
+                                              Container(
+                                                width: 60,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child: DropdownButtonFormField<int>(
+                                                  items: <int>[1,2,3].map(
+                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
+                                                          style:TextStyle(
+                                                            color:Color.fromRGBO(47, 71, 131, 1),
+                                                            fontSize:11,
+                                                            fontWeight:FontWeight.bold,
+                                                          )),value: e,)
+                                                  ).toList(),
+                                                  onChanged: (int? val) {
+                                                    setState(() {
+                                                      arrow = val!;
+                                                    });
+                                                  },
+                                                  decoration: InputDecoration(
+                                                    hintText: "1",
+                                                    enabledBorder: InputBorder.none,
+                                                    hintStyle: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 10
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 30
+                                              ),
+
+                                              Text('Description  ',
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                  width: 32
+                                              ),
+                                              Container(
+                                                width: 200,
+                                                height: 20,
+                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
+                                                ),
+                                                child : TextField(
+
+                                                )
+                                              ),
+                                              SizedBox(
+                                                  width: screen_width/50
+                                              ),
+                                            ],
                                           )
                                         ],
                                       ),
@@ -897,7 +2042,7 @@ class _StatefulWidgetState extends State<Dashboard> {
                             )
                           ],
                         ),
-                      ),
+                      )),
                     ),
                   ],
                 ),
@@ -909,3 +2054,4 @@ class _StatefulWidgetState extends State<Dashboard> {
     ));
   }
 }
+

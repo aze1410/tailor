@@ -456,21 +456,80 @@ class _StatefulWidgetState extends State<Dashboard> {
                                             child: Container(
                                               width: screen_width * 0.57,
                                               height: screen_height * 0.13,
-                                              child: TextField(
-                                                minLines: 3,
-                                                maxLines: 4,
-                                                textAlignVertical:
-                                                    TextAlignVertical.bottom,
-                                                textAlign: TextAlign.justify,
-                                                decoration: InputDecoration(
-                                                    border:
-                                                        new OutlineInputBorder(
-                                                            borderSide:
-                                                                new BorderSide(
-                                                                    color: Colors
-                                                                        .blue)),
-                                                    fillColor: Colors.white,
-                                                    filled: true),
+                                              decoration : BoxDecoration(
+                                                  border: Border.all(
+                                                  color: Colors.blue,
+                                                  )
+                                              ),
+                                              child:Column(
+                                                children: [
+                                                  TextField(
+                                                    minLines: 2,
+                                                    maxLines: 2,
+                                                    textAlignVertical:
+                                                      TextAlignVertical.bottom,
+                                                    textAlign: TextAlign.justify,
+                                                    decoration: InputDecoration(
+                                                      border: InputBorder.none,
+                                                      fillColor: Colors.white,
+                                                      filled: true
+                                                    ),
+                                                  ),
+                                                  Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                      children: [
+                                                        SizedBox(
+                                                            height: 25,
+                                                        width: 48,
+                                                       child: ElevatedButton(onPressed: (){},
+                                                            style:ElevatedButton.styleFrom(
+                                                                primary: Colors.grey,
+                                                                elevation: 0
+                                                            ),
+                                                            child: Text('1/4',
+                                                            style:TextStyle(
+                                                              fontSize: 10
+                                                            )
+                                                            )
+                                                            )),
+                                                        SizedBox(
+                                                          width: 10
+                                                        ),
+                                                        SizedBox(
+                                                            height: 25,
+                                                            width: 48,
+                                                            child: ElevatedButton(onPressed: (){},
+                                                                style:ElevatedButton.styleFrom(
+                                                                    primary: Colors.grey,
+                                                                    elevation: 0
+                                                                ),
+                                                                child: Text('1/2',
+                                                                    style:TextStyle(
+                                                                        fontSize: 10
+                                                                    )
+                                                                )
+                                                            )),
+                                                        SizedBox(
+                                                            width: 10
+                                                        ),
+                                                        SizedBox(
+                                                            height: 25,
+                                                            width: 48,
+                                                            child: ElevatedButton(onPressed: (){},
+                                                                style:ElevatedButton.styleFrom(
+                                                                    primary: Colors.grey,
+                                                                    elevation: 0
+                                                                ),
+                                                                child: Text('3/4',
+                                                                    style:TextStyle(
+                                                                        fontSize: 10
+                                                                    )
+                                                                )
+                                                            )),
+                                                      ],
+                                                  )
+                                                ]
                                               ),
                                             ),
                                           ),
@@ -499,14 +558,16 @@ class _StatefulWidgetState extends State<Dashboard> {
                                                 decoration: BoxDecoration(
                                                     border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
                                                 ),
-                                                child: DropdownButtonFormField(
+                                                child:
+                                                 DropdownButtonFormField(
                                                   items: <String>["xx","yy","zz"].map(
                                                           (e) => DropdownMenuItem(child: Text(e,
                                                           style:TextStyle(
                                                             color:Color.fromRGBO(47, 71, 131, 1),
                                                             fontSize:11,
                                                             fontWeight:FontWeight.bold,
-                                                          )),
+                                                          )
+                                                          ),
                                                             value: e,)
                                                   ).toList(),
                                                   onChanged: (String? val) {
@@ -522,8 +583,9 @@ class _StatefulWidgetState extends State<Dashboard> {
                                                           fontWeight: FontWeight.bold,
                                                           fontSize: 10
                                                       ),
+                                                      border:OutlineInputBorder()
+                                                  )
                                                   ),
-                                                ),
                                               ),
                                               SizedBox(
                                                   width: 35
@@ -1329,21 +1391,80 @@ class _StatefulWidgetState extends State<Dashboard> {
                                             child: Container(
                                               width: screen_width * 0.57,
                                               height: screen_height * 0.13,
-                                              child: TextField(
-                                                minLines: 3,
-                                                maxLines: 4,
-                                                textAlignVertical:
-                                                    TextAlignVertical.bottom,
-                                                textAlign: TextAlign.justify,
-                                                decoration: InputDecoration(
-                                                    border:
-                                                        new OutlineInputBorder(
-                                                            borderSide:
-                                                                new BorderSide(
-                                                                    color: Colors
-                                                                        .blue)),
-                                                    fillColor: Colors.white,
-                                                    filled: true),
+                                              decoration : BoxDecoration(
+                                                  border: Border.all(
+                                                    color: Colors.blue,
+                                                  )
+                                              ),
+                                              child:Column(
+                                                  children: [
+                                                    TextField(
+                                                      minLines: 2,
+                                                      maxLines: 2,
+                                                      textAlignVertical:
+                                                      TextAlignVertical.bottom,
+                                                      textAlign: TextAlign.justify,
+                                                      decoration: InputDecoration(
+                                                          border: InputBorder.none,
+                                                          fillColor: Colors.white,
+                                                          filled: true
+                                                      ),
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                      children: [
+                                                        SizedBox(
+                                                            height: 25,
+                                                            width: 48,
+                                                            child: ElevatedButton(onPressed: (){},
+                                                                style:ElevatedButton.styleFrom(
+                                                                    primary: Colors.grey,
+                                                                    elevation: 0
+                                                                ),
+                                                                child: Text('1/4',
+                                                                    style:TextStyle(
+                                                                        fontSize: 10
+                                                                    )
+                                                                )
+                                                            )),
+                                                        SizedBox(
+                                                            width: 10
+                                                        ),
+                                                        SizedBox(
+                                                            height: 25,
+                                                            width: 48,
+                                                            child: ElevatedButton(onPressed: (){},
+                                                                style:ElevatedButton.styleFrom(
+                                                                    primary: Colors.grey,
+                                                                    elevation: 0
+                                                                ),
+                                                                child: Text('1/2',
+                                                                    style:TextStyle(
+                                                                        fontSize: 10
+                                                                    )
+                                                                )
+                                                            )),
+                                                        SizedBox(
+                                                            width: 10
+                                                        ),
+                                                        SizedBox(
+                                                            height: 25,
+                                                            width: 48,
+                                                            child: ElevatedButton(onPressed: (){},
+                                                                style:ElevatedButton.styleFrom(
+                                                                    primary: Colors.grey,
+                                                                    elevation: 0
+                                                                ),
+                                                                child: Text('3/4',
+                                                                    style:TextStyle(
+                                                                        fontSize: 10
+                                                                    )
+                                                                )
+                                                            )),
+                                                      ],
+                                                    )
+                                                  ]
                                               ),
                                             ),
                                           ),

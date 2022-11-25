@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:tailoringui/screens/navbar.dart';
 import 'package:tailoringui/screens/sidenav.dart';
 
@@ -11,7 +14,6 @@ class Dashboard extends StatefulWidget {
 }
 
 class _StatefulWidgetState extends State<Dashboard> {
-
   @override
   static const IconData message = IconData(0xe3e0, fontFamily: 'MaterialIcons');
   static const account_circle = IconData(0xe043, fontFamily: 'MaterialIcons');
@@ -19,10 +21,10 @@ class _StatefulWidgetState extends State<Dashboard> {
   static const search = IconData(0xe567, fontFamily: 'MaterialIcons');
   static const home = IconData(0xe318, fontFamily: 'MaterialIcons');
 
-  String type1 ="";
-  String type2 ="";
-  String model1 ="";
-  String model2 ="";
+  String type1 = "";
+  String type2 = "";
+  String model1 = "";
+  String model2 = "";
   late int bottom;
   late int bottomzip;
   late int tp;
@@ -32,7 +34,7 @@ class _StatefulWidgetState extends State<Dashboard> {
   late int bp;
   late int loop;
   late int slack;
-  late int bc ;
+  late int bc;
   String kplist = "";
   late int sideopen;
   late int stitches2;
@@ -43,6 +45,57 @@ class _StatefulWidgetState extends State<Dashboard> {
   late int collor;
   String button = "";
   String desc = "";
+
+  final _nameController = TextEditingController();
+  final _phnController = TextEditingController();
+
+  Future submit() async {
+    addUserDetails(
+        _nameController.text.trim(),
+        int.parse(
+          _phnController.text.trim(),
+        ));
+
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text("Data Has been submitted"),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(builder: (context) => Dashboard()),
+                      (route) => false);
+                },
+                child: Container(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  padding: const EdgeInsets.all(14),
+                  child: const Text("okay"),
+                ),
+              ),
+            ],
+          );
+        });
+  }
+
+  Future addUserDetails(
+    String name,
+    int phn,
+  ) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .add({'name': name, 'phn': phn});
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+
+    _phnController.dispose();
+
+    super.dispose();
+  }
 
   Widget build(BuildContext context) {
     final screen_width = MediaQuery.of(context).size.width;
@@ -68,13 +121,10 @@ class _StatefulWidgetState extends State<Dashboard> {
 
                       Padding(
                         // padding: EdgeInsets.all(screen_width * 0.02),
-                        padding:EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                         child: Column(
                           children: [
-
-                            SizedBox(
-                              height: 17
-                            ),
+                            SizedBox(height: 17),
                             //1. Total Customers
 
                             Container(
@@ -235,6 +285,7 @@ class _StatefulWidgetState extends State<Dashboard> {
                             height: 30,
                             width: screen_width / 6,
                             child: TextField(
+                              controller: _nameController,
                               textAlignVertical: TextAlignVertical.bottom,
                               textAlign: TextAlign.justify,
                               decoration: InputDecoration(
@@ -263,6 +314,7 @@ class _StatefulWidgetState extends State<Dashboard> {
                             height: 30,
                             width: screen_width / 6,
                             child: TextField(
+                              controller: _phnController,
                               textAlignVertical: TextAlignVertical.bottom,
                               textAlign: TextAlign.justify,
                               decoration: InputDecoration(
@@ -282,7 +334,7 @@ class _StatefulWidgetState extends State<Dashboard> {
                     ),
 
                     // Pant
-            Pant(),
+                    Pant(),
                     SizedBox(
                       height: 10,
                     ),
@@ -292,7 +344,7 @@ class _StatefulWidgetState extends State<Dashboard> {
                     Padding(
                       padding: EdgeInsets.fromLTRB(screen_width / 43, 15, 0, 0),
                       child: SingleChildScrollView(
-                      child: Container(
+                          child: Container(
                         width: screen_width * 0.78,
                         color: Colors.white,
                         height: screen_height * 0.37,
@@ -465,81 +517,81 @@ class _StatefulWidgetState extends State<Dashboard> {
                                             child: Container(
                                               width: screen_width * 0.57,
                                               height: screen_height * 0.13,
-                                              decoration : BoxDecoration(
+                                              decoration: BoxDecoration(
                                                   border: Border.all(
-                                                    color: Colors.blue,
-                                                  )
-                                              ),
-                                              child:Column(
-                                                  children: [
-                                                    TextField(
-                                                      minLines: 2,
-                                                      maxLines: 2,
-                                                      textAlignVertical:
+                                                color: Colors.blue,
+                                              )),
+                                              child: Column(children: [
+                                                TextField(
+                                                  minLines: 2,
+                                                  maxLines: 2,
+                                                  textAlignVertical:
                                                       TextAlignVertical.bottom,
-                                                      textAlign: TextAlign.justify,
-                                                      decoration: InputDecoration(
-                                                          border: InputBorder.none,
-                                                          fillColor: Colors.white,
-                                                          filled: true
-                                                      ),
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                      children: [
-                                                        SizedBox(
-                                                            height: 25,
-                                                            width: 48,
-                                                            child: ElevatedButton(onPressed: (){},
-                                                                style:ElevatedButton.styleFrom(
-                                                                    primary: Colors.grey,
-                                                                    elevation: 0
-                                                                ),
-                                                                child: Text('1/4',
-                                                                    style:TextStyle(
-                                                                        fontSize: 10
-                                                                    )
-                                                                )
-                                                            )),
-                                                        SizedBox(
-                                                            width: 10
-                                                        ),
-                                                        SizedBox(
-                                                            height: 25,
-                                                            width: 48,
-                                                            child: ElevatedButton(onPressed: (){},
-                                                                style:ElevatedButton.styleFrom(
-                                                                    primary: Colors.grey,
-                                                                    elevation: 0
-                                                                ),
-                                                                child: Text('1/2',
-                                                                    style:TextStyle(
-                                                                        fontSize: 10
-                                                                    )
-                                                                )
-                                                            )),
-                                                        SizedBox(
-                                                            width: 10
-                                                        ),
-                                                        SizedBox(
-                                                            height: 25,
-                                                            width: 48,
-                                                            child: ElevatedButton(onPressed: (){},
-                                                                style:ElevatedButton.styleFrom(
-                                                                    primary: Colors.grey,
-                                                                    elevation: 0
-                                                                ),
-                                                                child: Text('3/4',
-                                                                    style:TextStyle(
-                                                                        fontSize: 10
-                                                                    )
-                                                                )
-                                                            )),
-                                                      ],
-                                                    )
-                                                  ]
-                                              ),
+                                                  textAlign: TextAlign.justify,
+                                                  decoration: InputDecoration(
+                                                      border: InputBorder.none,
+                                                      fillColor: Colors.white,
+                                                      filled: true),
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    SizedBox(
+                                                        height: 25,
+                                                        width: 48,
+                                                        child: ElevatedButton(
+                                                            onPressed: () {},
+                                                            style: ElevatedButton
+                                                                .styleFrom(
+                                                                    primary:
+                                                                        Colors
+                                                                            .grey,
+                                                                    elevation:
+                                                                        0),
+                                                            child: Text('1/4',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        10)))),
+                                                    SizedBox(width: 10),
+                                                    SizedBox(
+                                                        height: 25,
+                                                        width: 48,
+                                                        child: ElevatedButton(
+                                                            onPressed: () {},
+                                                            style: ElevatedButton
+                                                                .styleFrom(
+                                                                    primary:
+                                                                        Colors
+                                                                            .grey,
+                                                                    elevation:
+                                                                        0),
+                                                            child: Text('1/2',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        10)))),
+                                                    SizedBox(width: 10),
+                                                    SizedBox(
+                                                        height: 25,
+                                                        width: 48,
+                                                        child: ElevatedButton(
+                                                            onPressed: () {},
+                                                            style: ElevatedButton
+                                                                .styleFrom(
+                                                                    primary:
+                                                                        Colors
+                                                                            .grey,
+                                                                    elevation:
+                                                                        0),
+                                                            child: Text('3/4',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        10)))),
+                                                  ],
+                                                )
+                                              ]),
                                             ),
                                           ),
                                           SizedBox(
@@ -547,36 +599,53 @@ class _StatefulWidgetState extends State<Dashboard> {
                                           ),
                                           Row(
                                             children: [
-                                              SizedBox(
-                                                  width: 30
-                                              ),
-                                              Text('Type',
+                                              SizedBox(width: 30),
+                                              Text(
+                                                'Type',
                                                 style: TextStyle(
                                                   fontSize: 14,
-                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  color: Color.fromRGBO(
+                                                      47, 71, 131, 1),
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                  width: 27
-                                              ),
+                                              SizedBox(width: 27),
                                               Container(
                                                 width: 110,
                                                 height: 20,
-                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 12,
+                                                    vertical: 2),
                                                 decoration: BoxDecoration(
-                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
-                                                ),
+                                                    border: Border.all(
+                                                        color: Color.fromRGBO(
+                                                            47, 71, 131, 1),
+                                                        width: 1)),
                                                 child: DropdownButtonFormField(
-                                                  items: <String>["xx","yy","zz"].map(
-                                                          (e) => DropdownMenuItem(child: Text(e,
-                                                          style:TextStyle(
-                                                            color:Color.fromRGBO(47, 71, 131, 1),
-                                                            fontSize:11,
-                                                            fontWeight:FontWeight.bold,
-                                                          )),
-                                                        value: e,)
-                                                  ).toList(),
+                                                  items: <String>[
+                                                    "xx",
+                                                    "yy",
+                                                    "zz"
+                                                  ]
+                                                      .map((e) =>
+                                                          DropdownMenuItem(
+                                                            child: Text(e,
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          47,
+                                                                          71,
+                                                                          131,
+                                                                          1),
+                                                                  fontSize: 11,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                )),
+                                                            value: e,
+                                                          ))
+                                                      .toList(),
                                                   onChanged: (String? val) {
                                                     setState(() {
                                                       type2 = val!;
@@ -584,45 +653,64 @@ class _StatefulWidgetState extends State<Dashboard> {
                                                   },
                                                   decoration: InputDecoration(
                                                     hintText: "Full hand shirt",
-                                                    enabledBorder: InputBorder.none,
+                                                    enabledBorder:
+                                                        InputBorder.none,
                                                     hintStyle: TextStyle(
                                                         color: Colors.black,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 10
-                                                    ),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 10),
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(
-                                                  width: 35
-                                              ),
-
-                                              Text('F.Patti/F.பட்டி  ',
+                                              SizedBox(width: 35),
+                                              Text(
+                                                'F.Patti/F.பட்டி  ',
                                                 style: TextStyle(
                                                   fontSize: 14,
-                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  color: Color.fromRGBO(
+                                                      47, 71, 131, 1),
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                  width: 30
-                                              ),
+                                              SizedBox(width: 30),
                                               Container(
                                                 width: 60,
                                                 height: 20,
-                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 12,
+                                                    vertical: 2),
                                                 decoration: BoxDecoration(
-                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
-                                                ),
+                                                    border: Border.all(
+                                                        color: Color.fromRGBO(
+                                                            47, 71, 131, 1),
+                                                        width: 1)),
                                                 child: DropdownButtonFormField(
-                                                  items: <String>["xx","yy","zz"].map(
-                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
-                                                          style:TextStyle(
-                                                            color:Color.fromRGBO(47, 71, 131, 1),
-                                                            fontSize:11,
-                                                            fontWeight:FontWeight.bold,
-                                                          )),value: e,)
-                                                  ).toList(),
+                                                  items: <String>[
+                                                    "xx",
+                                                    "yy",
+                                                    "zz"
+                                                  ]
+                                                      .map((e) =>
+                                                          DropdownMenuItem(
+                                                            child: Text(
+                                                                e.toString(),
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          47,
+                                                                          71,
+                                                                          131,
+                                                                          1),
+                                                                  fontSize: 11,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                )),
+                                                            value: e,
+                                                          ))
+                                                      .toList(),
                                                   onChanged: (String? val) {
                                                     setState(() {
                                                       patti = val!;
@@ -630,45 +718,61 @@ class _StatefulWidgetState extends State<Dashboard> {
                                                   },
                                                   decoration: InputDecoration(
                                                     hintText: "1",
-                                                    enabledBorder: InputBorder.none,
+                                                    enabledBorder:
+                                                        InputBorder.none,
                                                     hintStyle: TextStyle(
                                                         color: Colors.black,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 10
-                                                    ),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 10),
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(
-                                                  width: 30
-                                              ),
-
-                                              Text('I P C           ',
+                                              SizedBox(width: 30),
+                                              Text(
+                                                'I P C           ',
                                                 style: TextStyle(
                                                   fontSize: 14,
-                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  color: Color.fromRGBO(
+                                                      47, 71, 131, 1),
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                  width: 28
-                                              ),
+                                              SizedBox(width: 28),
                                               Container(
                                                 width: 60,
                                                 height: 20,
-                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 12,
+                                                    vertical: 2),
                                                 decoration: BoxDecoration(
-                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
-                                                ),
-                                                child: DropdownButtonFormField<int>(
-                                                  items: <int>[1,2,3].map(
-                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
-                                                          style:TextStyle(
-                                                            color:Color.fromRGBO(47, 71, 131, 1),
-                                                            fontSize:11,
-                                                            fontWeight:FontWeight.bold,
-                                                          )),value: e,)
-                                                  ).toList(),
+                                                    border: Border.all(
+                                                        color: Color.fromRGBO(
+                                                            47, 71, 131, 1),
+                                                        width: 1)),
+                                                child: DropdownButtonFormField<
+                                                    int>(
+                                                  items: <int>[1, 2, 3]
+                                                      .map((e) =>
+                                                          DropdownMenuItem(
+                                                            child: Text(
+                                                                e.toString(),
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          47,
+                                                                          71,
+                                                                          131,
+                                                                          1),
+                                                                  fontSize: 11,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                )),
+                                                            value: e,
+                                                          ))
+                                                      .toList(),
                                                   onChanged: (int? val) {
                                                     setState(() {
                                                       ipc = val!;
@@ -676,20 +780,18 @@ class _StatefulWidgetState extends State<Dashboard> {
                                                   },
                                                   decoration: InputDecoration(
                                                     hintText: "1",
-                                                    enabledBorder: InputBorder.none,
+                                                    enabledBorder:
+                                                        InputBorder.none,
                                                     hintStyle: TextStyle(
                                                         color: Colors.black,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 10
-                                                    ),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 10),
                                                   ),
                                                 ),
                                               ),
                                               SizedBox(
-                                                  width: screen_width/50
-                                              ),
-
-
+                                                  width: screen_width / 50),
                                             ],
                                           ),
                                           SizedBox(
@@ -697,36 +799,53 @@ class _StatefulWidgetState extends State<Dashboard> {
                                           ),
                                           Row(
                                             children: [
-                                              SizedBox(
-                                                  width: 30
-                                              ),
-                                              Text('Model',
+                                              SizedBox(width: 30),
+                                              Text(
+                                                'Model',
                                                 style: TextStyle(
                                                   fontSize: 14,
-                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  color: Color.fromRGBO(
+                                                      47, 71, 131, 1),
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                  width: 15
-                                              ),
+                                              SizedBox(width: 15),
                                               Container(
                                                 width: 110,
                                                 height: 20,
-                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 12,
+                                                    vertical: 2),
                                                 decoration: BoxDecoration(
-                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
-                                                ),
+                                                    border: Border.all(
+                                                        color: Color.fromRGBO(
+                                                            47, 71, 131, 1),
+                                                        width: 1)),
                                                 child: DropdownButtonFormField(
-                                                  items: <String>["xx","yy","zz"].map(
-                                                          (e) => DropdownMenuItem(child: Text(e,
-                                                          style:TextStyle(
-                                                            color:Color.fromRGBO(47, 71, 131, 1),
-                                                            fontSize:11,
-                                                            fontWeight:FontWeight.bold,
-                                                          )),
-                                                        value: e,)
-                                                  ).toList(),
+                                                  items: <String>[
+                                                    "xx",
+                                                    "yy",
+                                                    "zz"
+                                                  ]
+                                                      .map((e) =>
+                                                          DropdownMenuItem(
+                                                            child: Text(e,
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          47,
+                                                                          71,
+                                                                          131,
+                                                                          1),
+                                                                  fontSize: 11,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                )),
+                                                            value: e,
+                                                          ))
+                                                      .toList(),
                                                   onChanged: (String? val) {
                                                     setState(() {
                                                       model2 = val!;
@@ -734,45 +853,61 @@ class _StatefulWidgetState extends State<Dashboard> {
                                                   },
                                                   decoration: InputDecoration(
                                                     hintText: "Suit/சூட் ",
-                                                    enabledBorder: InputBorder.none,
+                                                    enabledBorder:
+                                                        InputBorder.none,
                                                     hintStyle: TextStyle(
                                                         color: Colors.black,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 10
-                                                    ),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 10),
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(
-                                                  width: 16
-                                              ),
-
-                                              Text('Side Open/சைடு ஓபன்',
+                                              SizedBox(width: 16),
+                                              Text(
+                                                'Side Open/சைடு ஓபன்',
                                                 style: TextStyle(
                                                   fontSize: 14,
-                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  color: Color.fromRGBO(
+                                                      47, 71, 131, 1),
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                  width: 6
-                                              ),
+                                              SizedBox(width: 6),
                                               Container(
                                                 width: 50,
                                                 height: 20,
-                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 12,
+                                                    vertical: 2),
                                                 decoration: BoxDecoration(
-                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
-                                                ),
-                                                child: DropdownButtonFormField<int>(
-                                                  items: <int>[1,2,3].map(
-                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
-                                                          style:TextStyle(
-                                                            color:Color.fromRGBO(47, 71, 131, 1),
-                                                            fontSize:11,
-                                                            fontWeight:FontWeight.bold,
-                                                          )),value: e,)
-                                                  ).toList(),
+                                                    border: Border.all(
+                                                        color: Color.fromRGBO(
+                                                            47, 71, 131, 1),
+                                                        width: 1)),
+                                                child: DropdownButtonFormField<
+                                                    int>(
+                                                  items: <int>[1, 2, 3]
+                                                      .map((e) =>
+                                                          DropdownMenuItem(
+                                                            child: Text(
+                                                                e.toString(),
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          47,
+                                                                          71,
+                                                                          131,
+                                                                          1),
+                                                                  fontSize: 11,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                )),
+                                                            value: e,
+                                                          ))
+                                                      .toList(),
                                                   onChanged: (int? val) {
                                                     setState(() {
                                                       sideopen = val!;
@@ -780,45 +915,61 @@ class _StatefulWidgetState extends State<Dashboard> {
                                                   },
                                                   decoration: InputDecoration(
                                                     hintText: "1",
-                                                    enabledBorder: InputBorder.none,
+                                                    enabledBorder:
+                                                        InputBorder.none,
                                                     hintStyle: TextStyle(
                                                         color: Colors.black,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 10
-                                                    ),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 10),
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(
-                                                  width: 20
-                                              ),
-
-                                              Text('Collar/காலர்',
+                                              SizedBox(width: 20),
+                                              Text(
+                                                'Collar/காலர்',
                                                 style: TextStyle(
                                                   fontSize: 14,
-                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  color: Color.fromRGBO(
+                                                      47, 71, 131, 1),
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                  width: 10
-                                              ),
+                                              SizedBox(width: 10),
                                               Container(
                                                 width: 60,
                                                 height: 20,
-                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 12,
+                                                    vertical: 2),
                                                 decoration: BoxDecoration(
-                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
-                                                ),
-                                                child: DropdownButtonFormField<int>(
-                                                  items: <int>[1,2,3].map(
-                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
-                                                          style:TextStyle(
-                                                            color:Color.fromRGBO(47, 71, 131, 1),
-                                                            fontSize:11,
-                                                            fontWeight:FontWeight.bold,
-                                                          )),value: e,)
-                                                  ).toList(),
+                                                    border: Border.all(
+                                                        color: Color.fromRGBO(
+                                                            47, 71, 131, 1),
+                                                        width: 1)),
+                                                child: DropdownButtonFormField<
+                                                    int>(
+                                                  items: <int>[1, 2, 3]
+                                                      .map((e) =>
+                                                          DropdownMenuItem(
+                                                            child: Text(
+                                                                e.toString(),
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          47,
+                                                                          71,
+                                                                          131,
+                                                                          1),
+                                                                  fontSize: 11,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                )),
+                                                            value: e,
+                                                          ))
+                                                      .toList(),
                                                   onChanged: (int? val) {
                                                     setState(() {
                                                       collor = val!;
@@ -826,19 +977,18 @@ class _StatefulWidgetState extends State<Dashboard> {
                                                   },
                                                   decoration: InputDecoration(
                                                     hintText: "1",
-                                                    enabledBorder: InputBorder.none,
+                                                    enabledBorder:
+                                                        InputBorder.none,
                                                     hintStyle: TextStyle(
                                                         color: Colors.black,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 10
-                                                    ),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 10),
                                                   ),
                                                 ),
                                               ),
                                               SizedBox(
-                                                  width: screen_width/50
-                                              ),
-
+                                                  width: screen_width / 50),
                                             ],
                                           ),
                                           SizedBox(
@@ -846,36 +996,51 @@ class _StatefulWidgetState extends State<Dashboard> {
                                           ),
                                           Row(
                                             children: [
-                                              SizedBox(
-                                                  width: 30
-                                              ),
-                                              Text('Slock',
+                                              SizedBox(width: 30),
+                                              Text(
+                                                'Slock',
                                                 style: TextStyle(
                                                   fontSize: 14,
-                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  color: Color.fromRGBO(
+                                                      47, 71, 131, 1),
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                  width: 25
-                                              ),
+                                              SizedBox(width: 25),
                                               Container(
                                                 width: 110,
                                                 height: 20,
-                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 12,
+                                                    vertical: 2),
                                                 decoration: BoxDecoration(
-                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
-                                                ),
-                                                child: DropdownButtonFormField<int>(
-                                                  items: <int>[1,2,3].map(
-                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
-                                                          style:TextStyle(
-                                                            color:Color.fromRGBO(47, 71, 131, 1),
-                                                            fontSize:11,
-                                                            fontWeight:FontWeight.bold,
-                                                          )),
-                                                        value: e,)
-                                                  ).toList(),
+                                                    border: Border.all(
+                                                        color: Color.fromRGBO(
+                                                            47, 71, 131, 1),
+                                                        width: 1)),
+                                                child: DropdownButtonFormField<
+                                                    int>(
+                                                  items: <int>[1, 2, 3]
+                                                      .map((e) =>
+                                                          DropdownMenuItem(
+                                                            child: Text(
+                                                                e.toString(),
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          47,
+                                                                          71,
+                                                                          131,
+                                                                          1),
+                                                                  fontSize: 11,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                )),
+                                                            value: e,
+                                                          ))
+                                                      .toList(),
                                                   onChanged: (int? val) {
                                                     setState(() {
                                                       slack = val!;
@@ -883,45 +1048,61 @@ class _StatefulWidgetState extends State<Dashboard> {
                                                   },
                                                   decoration: InputDecoration(
                                                     hintText: "1",
-                                                    enabledBorder: InputBorder.none,
+                                                    enabledBorder:
+                                                        InputBorder.none,
                                                     hintStyle: TextStyle(
                                                         color: Colors.black,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 10
-                                                    ),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 10),
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(
-                                                  width: 35
-                                              ),
-
-                                              Text('Stitches/தையல்',
+                                              SizedBox(width: 35),
+                                              Text(
+                                                'Stitches/தையல்',
                                                 style: TextStyle(
                                                   fontSize: 14,
-                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  color: Color.fromRGBO(
+                                                      47, 71, 131, 1),
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                  width: 18
-                                              ),
+                                              SizedBox(width: 18),
                                               Container(
                                                 width: 60,
                                                 height: 20,
-                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 12,
+                                                    vertical: 2),
                                                 decoration: BoxDecoration(
-                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
-                                                ),
-                                                child: DropdownButtonFormField<int>(
-                                                  items: <int>[1,2,3].map(
-                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
-                                                          style:TextStyle(
-                                                            color:Color.fromRGBO(47, 71, 131, 1),
-                                                            fontSize:11,
-                                                            fontWeight:FontWeight.bold,
-                                                          )),value: e,)
-                                                  ).toList(),
+                                                    border: Border.all(
+                                                        color: Color.fromRGBO(
+                                                            47, 71, 131, 1),
+                                                        width: 1)),
+                                                child: DropdownButtonFormField<
+                                                    int>(
+                                                  items: <int>[1, 2, 3]
+                                                      .map((e) =>
+                                                          DropdownMenuItem(
+                                                            child: Text(
+                                                                e.toString(),
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          47,
+                                                                          71,
+                                                                          131,
+                                                                          1),
+                                                                  fontSize: 11,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                )),
+                                                            value: e,
+                                                          ))
+                                                      .toList(),
                                                   onChanged: (int? val) {
                                                     setState(() {
                                                       stitches = val!;
@@ -929,45 +1110,65 @@ class _StatefulWidgetState extends State<Dashboard> {
                                                   },
                                                   decoration: InputDecoration(
                                                     hintText: "1",
-                                                    enabledBorder: InputBorder.none,
+                                                    enabledBorder:
+                                                        InputBorder.none,
                                                     hintStyle: TextStyle(
                                                         color: Colors.black,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 10
-                                                    ),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 10),
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(
-                                                  width: 20
-                                              ),
-
-                                              Text('Button/பட்டன்',
+                                              SizedBox(width: 20),
+                                              Text(
+                                                'Button/பட்டன்',
                                                 style: TextStyle(
                                                   fontSize: 14,
-                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  color: Color.fromRGBO(
+                                                      47, 71, 131, 1),
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                  width: 5
-                                              ),
+                                              SizedBox(width: 5),
                                               Container(
                                                 width: 60,
                                                 height: 20,
-                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 12,
+                                                    vertical: 2),
                                                 decoration: BoxDecoration(
-                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
-                                                ),
-                                                child: DropdownButtonFormField<String>(
-                                                  items: <String>["xx","yy","zz"].map(
-                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
-                                                          style:TextStyle(
-                                                            color:Color.fromRGBO(47, 71, 131, 1),
-                                                            fontSize:11,
-                                                            fontWeight:FontWeight.bold,
-                                                          )),value: e,)
-                                                  ).toList(),
+                                                    border: Border.all(
+                                                        color: Color.fromRGBO(
+                                                            47, 71, 131, 1),
+                                                        width: 1)),
+                                                child: DropdownButtonFormField<
+                                                    String>(
+                                                  items: <String>[
+                                                    "xx",
+                                                    "yy",
+                                                    "zz"
+                                                  ]
+                                                      .map((e) =>
+                                                          DropdownMenuItem(
+                                                            child: Text(
+                                                                e.toString(),
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          47,
+                                                                          71,
+                                                                          131,
+                                                                          1),
+                                                                  fontSize: 11,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                )),
+                                                            value: e,
+                                                          ))
+                                                      .toList(),
                                                   onChanged: (String? val) {
                                                     setState(() {
                                                       button = val!;
@@ -975,20 +1176,18 @@ class _StatefulWidgetState extends State<Dashboard> {
                                                   },
                                                   decoration: InputDecoration(
                                                     hintText: "1",
-                                                    enabledBorder: InputBorder.none,
+                                                    enabledBorder:
+                                                        InputBorder.none,
                                                     hintStyle: TextStyle(
                                                         color: Colors.black,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 10
-                                                    ),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 10),
                                                   ),
                                                 ),
                                               ),
                                               SizedBox(
-                                                  width: screen_width/50
-                                              ),
-
-
+                                                  width: screen_width / 50),
                                             ],
                                           ),
                                           SizedBox(
@@ -996,36 +1195,51 @@ class _StatefulWidgetState extends State<Dashboard> {
                                           ),
                                           Row(
                                             children: [
-                                              SizedBox(
-                                                  width: 30
-                                              ),
-                                              Text('B.C     ',
+                                              SizedBox(width: 30),
+                                              Text(
+                                                'B.C     ',
                                                 style: TextStyle(
                                                   fontSize: 14,
-                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  color: Color.fromRGBO(
+                                                      47, 71, 131, 1),
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                  width: 15
-                                              ),
+                                              SizedBox(width: 15),
                                               Container(
                                                 width: 110,
                                                 height: 20,
-                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 12,
+                                                    vertical: 2),
                                                 decoration: BoxDecoration(
-                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
-                                                ),
-                                                child: DropdownButtonFormField<int>(
-                                                  items: <int>[1,2,3].map(
-                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
-                                                          style:TextStyle(
-                                                            color:Color.fromRGBO(47, 71, 131, 1),
-                                                            fontSize:11,
-                                                            fontWeight:FontWeight.bold,
-                                                          )),
-                                                        value: e,)
-                                                  ).toList(),
+                                                    border: Border.all(
+                                                        color: Color.fromRGBO(
+                                                            47, 71, 131, 1),
+                                                        width: 1)),
+                                                child: DropdownButtonFormField<
+                                                    int>(
+                                                  items: <int>[1, 2, 3]
+                                                      .map((e) =>
+                                                          DropdownMenuItem(
+                                                            child: Text(
+                                                                e.toString(),
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          47,
+                                                                          71,
+                                                                          131,
+                                                                          1),
+                                                                  fontSize: 11,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                )),
+                                                            value: e,
+                                                          ))
+                                                      .toList(),
                                                   onChanged: (int? val) {
                                                     setState(() {
                                                       bc = val!;
@@ -1033,45 +1247,62 @@ class _StatefulWidgetState extends State<Dashboard> {
                                                   },
                                                   decoration: InputDecoration(
                                                     hintText: "1",
-                                                    enabledBorder: InputBorder.none,
+                                                    enabledBorder:
+                                                        InputBorder.none,
                                                     hintStyle: TextStyle(
                                                         color: Colors.black,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 10
-                                                    ),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 10),
                                                   ),
                                                 ),
                                               ),
                                               SizedBox(
-                                                  width: screen_width/40
-                                              ),
-
-                                              Text('Arrow/ஆரோ  ',
+                                                  width: screen_width / 40),
+                                              Text(
+                                                'Arrow/ஆரோ  ',
                                                 style: TextStyle(
                                                   fontSize: 14,
-                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  color: Color.fromRGBO(
+                                                      47, 71, 131, 1),
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                  width: 16
-                                              ),
+                                              SizedBox(width: 16),
                                               Container(
                                                 width: 60,
                                                 height: 20,
-                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 12,
+                                                    vertical: 2),
                                                 decoration: BoxDecoration(
-                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
-                                                ),
-                                                child: DropdownButtonFormField<int>(
-                                                  items: <int>[1,2,3].map(
-                                                          (e) => DropdownMenuItem(child: Text(e.toString(),
-                                                          style:TextStyle(
-                                                            color:Color.fromRGBO(47, 71, 131, 1),
-                                                            fontSize:11,
-                                                            fontWeight:FontWeight.bold,
-                                                          )),value: e,)
-                                                  ).toList(),
+                                                    border: Border.all(
+                                                        color: Color.fromRGBO(
+                                                            47, 71, 131, 1),
+                                                        width: 1)),
+                                                child: DropdownButtonFormField<
+                                                    int>(
+                                                  items: <int>[1, 2, 3]
+                                                      .map((e) =>
+                                                          DropdownMenuItem(
+                                                            child: Text(
+                                                                e.toString(),
+                                                                style:
+                                                                    TextStyle(
+                                                                  color: Color
+                                                                      .fromRGBO(
+                                                                          47,
+                                                                          71,
+                                                                          131,
+                                                                          1),
+                                                                  fontSize: 11,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                )),
+                                                            value: e,
+                                                          ))
+                                                      .toList(),
                                                   onChanged: (int? val) {
                                                     setState(() {
                                                       arrow = val!;
@@ -1079,43 +1310,41 @@ class _StatefulWidgetState extends State<Dashboard> {
                                                   },
                                                   decoration: InputDecoration(
                                                     hintText: "1",
-                                                    enabledBorder: InputBorder.none,
+                                                    enabledBorder:
+                                                        InputBorder.none,
                                                     hintStyle: TextStyle(
                                                         color: Colors.black,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 10
-                                                    ),
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 10),
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(
-                                                  width: 30
-                                              ),
-
-                                              Text('Description  ',
+                                              SizedBox(width: 30),
+                                              Text(
+                                                'Description  ',
                                                 style: TextStyle(
                                                   fontSize: 14,
-                                                  color: Color.fromRGBO(47, 71, 131, 1),
+                                                  color: Color.fromRGBO(
+                                                      47, 71, 131, 1),
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
-                                              SizedBox(
-                                                  width: 32
-                                              ),
+                                              SizedBox(width: 32),
                                               Container(
-                                                width: 200,
-                                                height: 20,
-                                                padding: EdgeInsets.symmetric(horizontal: 12,vertical: 2),
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(color: Color.fromRGBO(47, 71, 131, 1),width: 1)
-                                                ),
-                                                child : TextField(
-
-                                                )
-                                              ),
+                                                  width: 200,
+                                                  height: 20,
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: 12,
+                                                      vertical: 2),
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          color: Color.fromRGBO(
+                                                              47, 71, 131, 1),
+                                                          width: 1)),
+                                                  child: TextField()),
                                               SizedBox(
-                                                  width: screen_width/50
-                                              ),
+                                                  width: screen_width / 50),
                                             ],
                                           )
                                         ],
@@ -1164,8 +1393,7 @@ class _StatefulWidgetState extends State<Dashboard> {
                                               Row(
                                                 children: [
                                                   ElevatedButton(
-                                                    onPressed: () {
-                                                    },
+                                                    onPressed: () {},
                                                     child: Text('Print'),
                                                     style: ElevatedButton
                                                         .styleFrom(
@@ -1180,7 +1408,9 @@ class _StatefulWidgetState extends State<Dashboard> {
                                                     width: screen_width * 0.015,
                                                   ),
                                                   ElevatedButton(
-                                                    onPressed: () {},
+                                                    onPressed: () {
+                                                      submit();
+                                                    },
                                                     child: Text('Ok'),
                                                     style: ElevatedButton
                                                         .styleFrom(
@@ -1250,4 +1480,3 @@ class _StatefulWidgetState extends State<Dashboard> {
     ));
   }
 }
-
